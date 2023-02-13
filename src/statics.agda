@@ -10,6 +10,7 @@ module statics where
     here  : ∀ {x τ Γ}
       → x :: τ ∈ (Γ , x :: τ)
     there : ∀ {x₁ τ₁ x₂ τ₂ Γ}
+      → (x₁ ≡ x₂ → ⊥)
       → x₁ :: τ₁ ∈ Γ
       --------------------------
       → x₁ :: τ₁ ∈ (Γ , x₂ :: τ₂)
@@ -55,7 +56,7 @@ module statics where
       → Γ ⊢ True :: Bool
     T-False : ∀ {Γ}
       → Γ ⊢ False :: Bool
-    T-If : ∀ {Γ e₁ e₂ e₃ τ}
+    T-If : ∀ {Γ τ e₁ e₂ e₃}
       → Γ ⊢ e₁ :: Bool
       → Γ ⊢ e₂ :: τ
       → Γ ⊢ e₃ :: τ
@@ -74,7 +75,7 @@ module statics where
       → (Γ , x :: τᵢ) ⊢ e :: τₒ
       --------------------------
       → Γ ⊢ Fun τᵢ x e :: Arrow τᵢ τₒ
-    T-Ap : ∀ {Γ e₁ e₂ τᵢ τₒ}
+    T-Ap : ∀ {Γ τᵢ τₒ e₁ e₂}
       → Γ ⊢ e₁ :: Arrow τᵢ τₒ
       → Γ ⊢ e₂ :: τᵢ
       --------------------------
