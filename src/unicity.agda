@@ -22,5 +22,5 @@ module unicity where
   unicity (T-LetAnn _ D) (T-LetAnn _ D') = unicity D D'
   unicity {_} {Arrow τᵢ _} {Arrow τᵢ _} (T-Fun D) (T-Fun D') =
     cong (Arrow τᵢ) (unicity D D')
-  unicity (T-Ap D₁ D₂) (T-Ap D₁' D₂') =
+  unicity (T-Ap D₁ _) (T-Ap D₁' _) =
     cong (λ {(Arrow _ τₒ) → τₒ; x → x}) (unicity D₁ D₁')
